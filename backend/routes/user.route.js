@@ -5,8 +5,8 @@ const router = Router(); // router works like mini app to handle related routes,
 router
   .route("/:id")
   .get((req, res) => {
+    console.log(req.user);
     res.send(`Get user with ID: ${req.params.id}`);
-    log(req.user);
   })
   .put((req, res) => {
     res.send(`Update user with ID: ${req.params.id}`);
@@ -22,6 +22,8 @@ const users = [
   { id: "2", name: "Bob" },
   { id: "3", name: "Charlie" },
 ];
+
+// when :id is present in route, this middleware runs first
 router.param("id", (req, res, next, id) => {
   console.log(`User ID param: ${id}`);
   req.user = users[id];
